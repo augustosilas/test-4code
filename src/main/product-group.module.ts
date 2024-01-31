@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { Module, forwardRef } from '@nestjs/common';
 import {
   CreateProductGroupService,
   DeleteProductGroupService,
@@ -8,6 +8,7 @@ import {
 } from 'src/data/services/product-group';
 import { InMemoryProductGroup } from 'src/infra/repo/in-memory-product-group';
 import { ProductGroupController } from 'src/presentation/controllers/product-group.controller';
+import { ProductModule } from './product.module';
 
 @Module({
   controllers: [ProductGroupController],
@@ -43,5 +44,6 @@ import { ProductGroupController } from 'src/presentation/controllers/product-gro
       useClass: InMemoryProductGroup,
     },
   ],
+  imports: [forwardRef(() => ProductModule)],
 })
 export class ProductGroupModule { }

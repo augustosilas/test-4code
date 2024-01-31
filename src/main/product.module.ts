@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { Module, forwardRef } from '@nestjs/common';
 import {
   CreateProductService,
   FindProductByIdService,
@@ -38,6 +38,12 @@ import { InMemoryProduct } from 'src/infra/repo/in-memory-product';
       useClass: InMemoryProduct,
     },
   ],
-  imports: [ProductGroupModule],
+  exports: [
+    {
+      provide: 'ProductRepository',
+      useClass: InMemoryProduct,
+    },
+  ],
+  imports: [forwardRef(() => ProductGroupModule)],
 })
 export class ProductModule { }
