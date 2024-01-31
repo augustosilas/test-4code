@@ -19,7 +19,7 @@ export type InputUpdate = {
   id: number;
   name?: string;
   price?: number;
-  groupId?: number;
+  groupId: number;
 };
 export type OutputUpdate = void;
 
